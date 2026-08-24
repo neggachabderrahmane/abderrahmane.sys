@@ -153,7 +153,8 @@ export default function App() {
     }
   };
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = (e) => {
+    if (e) e.stopPropagation();
     navigator.clipboard.writeText(emailAddress);
     setCopiedEmail(true);
     setToastMessage("Email copied to clipboard!");
@@ -260,7 +261,7 @@ export default function App() {
     },
     {
       id: 'teamsync',
-      title: 'TeamSync / Abdo-Team',
+      title: 'Abdo-Team',
       subtitle: 'B2B SaaS Project Management',
       type: 'Enterprise Web Application',
       impactBadge: 'Multi-Tenant SaaS',
@@ -417,7 +418,7 @@ export default function App() {
         }}
       />
 
-      {/* 3. UPGRADED CENTERED FLOATING CAPSULE NAVBAR */}
+      {/* 3. CENTERED FLOATING CAPSULE NAVBAR */}
       <motion.header
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -476,15 +477,13 @@ export default function App() {
               <span className="text-cyan-400 font-semibold hidden sm:inline">{scrollPct}%</span>
             </div>
 
-            <motion.a
+            <a
               href="#contact"
               onClick={(e) => scrollToSection(e, 'contact')}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0,240,255,0.6)" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(0,240,255,0.4)] cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_0_15px_rgba(0,240,255,0.4)] hover:shadow-[0_0_25px_rgba(0,240,255,0.7)] cursor-pointer active:scale-95"
             >
               Connect
-            </motion.a>
+            </a>
           </div>
         </nav>
       </motion.header>
@@ -568,31 +567,28 @@ export default function App() {
                 </div>
               </motion.div>
 
-              {/* Equalized Hero CTA Buttons */}
+              {/* Layout-Safe Equalized Hero CTA Buttons */}
               <motion.div
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full"
               >
-                <motion.a
+                <a
                   href="#projects"
                   onClick={(e) => scrollToSection(e, 'projects')}
-                  whileHover={{ scale: 1.04, boxShadow: "0 0 25px rgba(0,240,255,0.5)" }}
-                  whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.4)] gap-2 transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] gap-2 transition-all duration-200 cursor-pointer active:scale-95"
                 >
                   <span>Explore Featured Projects</span>
                   <ArrowUpRight className="w-4 h-4 text-slate-950 font-bold" />
-                </motion.a>
+                </a>
 
-                <motion.button
+                <button
+                  type="button"
                   onClick={handleCopyEmail}
-                  whileHover={{ scale: 1.03, borderColor: "rgba(0,240,255,0.5)" }}
-                  whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-black/60 hover:bg-white/10 text-slate-200 border border-white/15 gap-2 transition-all shadow-lg cursor-pointer"
+                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-black/60 hover:bg-white/15 text-slate-200 border border-white/15 hover:border-cyan-400/50 gap-2 transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-cyan-400" /> : <Copy className="w-4 h-4 text-slate-400" />}
                   <span>{copiedEmail ? 'Email Copied!' : 'Copy Direct Email'}</span>
-                </motion.button>
+                </button>
               </motion.div>
             </motion.div>
           </TiltCard>
@@ -642,17 +638,15 @@ export default function App() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {primaryTech.map((tech) => (
-                  <motion.div
+                  <div
                     key={tech.name}
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    transition={{ duration: 0.2 }}
-                    className="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-400/40 transition-all duration-300 group hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                    className="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-400/40 transition-all duration-200 group hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]"
                   >
                     <div className="font-bold text-sm text-slate-100 group-hover:text-cyan-300 transition-colors font-display">
                       {tech.name}
                     </div>
                     <div className="text-[11px] text-slate-400 mt-1">{tech.role}</div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </TiltCard>
@@ -679,11 +673,9 @@ export default function App() {
                 {academicFoundations.map((item) => {
                   const IconComponent = item.icon;
                   return (
-                    <motion.div
+                    <div
                       key={item.name}
-                      whileHover={{ x: 4 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all"
+                      className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/10 hover:border-white/20 transition-all duration-200"
                     >
                       <div className={`p-2 rounded-xl border ${item.color} mt-0.5`}>
                         <IconComponent className="w-4 h-4" />
@@ -692,7 +684,7 @@ export default function App() {
                         <div className="font-bold text-sm text-slate-100 font-display">{item.name}</div>
                         <div className="text-xs text-slate-400 leading-relaxed mt-0.5">{item.desc}</div>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
@@ -769,7 +761,7 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        {/* SECTION 4: FEATURED PROJECTS WITH 1. VERIFIED WORKING ACTION BUTTONS */}
+        {/* SECTION 4: FEATURED PROJECTS WITH FLICKER-FREE ACTION BUTTONS */}
         <motion.section
           id="projects"
           initial="hidden"
@@ -792,7 +784,7 @@ export default function App() {
                 className={project.featured ? 'lg:col-span-2' : ''}
               >
                 <TiltCard
-                  maxTilt={project.featured ? 6 : 9}
+                  maxTilt={project.featured ? 5 : 8}
                   glareOpacity={0.2}
                   className={`backdrop-blur-xl bg-black/60 border border-white/15 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.2)] group h-full ${
                     project.featured ? 'bg-gradient-to-br from-black/70 via-black/60 to-cyan-950/30 border-cyan-500/30' : ''
@@ -845,54 +837,54 @@ export default function App() {
                       ))}
                     </div>
 
-                    {/* 1. Fully Verified Active Action Buttons */}
-                    <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/10">
+                    {/* 1. Layout-Safe Action Buttons Container with Explicit Pointer-Events & z-index */}
+                    <div className="relative z-20 pointer-events-auto flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/10">
                       {project.liveUrl ? (
-                        <motion.button
+                        <button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
                           }}
-                          whileHover={{ scale: 1.04, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
-                          whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 text-xs font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all flex-1 sm:flex-initial cursor-pointer"
+                          onMouseEnter={(e) => e.stopPropagation()}
+                          onMouseMove={(e) => e.stopPropagation()}
+                          className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 text-xs font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all duration-200 flex-1 sm:flex-initial cursor-pointer active:scale-95"
                         >
                           <span>Live Demo</span>
                           <ExternalLink className="w-3.5 h-3.5 text-slate-950 font-bold" />
-                        </motion.button>
+                        </button>
                       ) : null}
 
                       {/* Inspect Architecture Button */}
-                      <motion.button
+                      <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setInspectingProjectId(project.id);
                         }}
-                        whileHover={{ scale: 1.04, borderColor: "rgba(0,240,255,0.6)", backgroundColor: "rgba(0,240,255,0.15)" }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-cyan-500/10 text-cyan-300 text-xs font-bold tracking-wider uppercase border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.15)] transition-all flex-1 sm:flex-initial cursor-pointer"
+                        onMouseEnter={(e) => e.stopPropagation()}
+                        onMouseMove={(e) => e.stopPropagation()}
+                        className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-cyan-500/10 text-cyan-300 hover:text-white text-xs font-bold tracking-wider uppercase border border-cyan-400/40 hover:bg-cyan-500/20 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.15)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 flex-1 sm:flex-initial cursor-pointer active:scale-95"
                       >
                         <SearchCode className="w-4 h-4 text-cyan-400" />
                         <span>Inspect Architecture</span>
-                      </motion.button>
+                      </button>
 
                       {/* GitHub Source Link Button */}
-                      <motion.button
+                      <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           window.open(project.githubUrl || "https://github.com/neggachabderrahmane", '_blank', 'noopener,noreferrer');
                         }}
-                        whileHover={{ scale: 1.04, borderColor: "rgba(255,255,255,0.4)", backgroundColor: "rgba(255,255,255,0.08)" }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-3.5 rounded-xl bg-black/50 text-slate-300 text-xs font-semibold tracking-wide border border-white/15 transition-all hover:text-white cursor-pointer"
+                        onMouseEnter={(e) => e.stopPropagation()}
+                        onMouseMove={(e) => e.stopPropagation()}
+                        className="inline-flex items-center justify-center gap-2 h-11 px-3.5 rounded-xl bg-black/50 text-slate-300 hover:text-white text-xs font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
                         aria-label="View Source on GitHub"
                       >
                         <GithubIcon className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">GitHub</span>
-                      </motion.button>
+                      </button>
                     </div>
                   </div>
                 </TiltCard>
@@ -932,65 +924,65 @@ export default function App() {
                 Available for full-stack engineering roles, systems architecture consulting, and cybersecurity-focused custom software development.
               </p>
 
-              {/* Primary Call to Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 w-full">
-                {/* Standout Glowing Border Primary Button */}
-                <motion.a
+              {/* Layout-Safe Primary Call to Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 w-full relative z-20 pointer-events-auto">
+                <a
                   href={`mailto:${emailAddress}?subject=Engineering%20Collaboration%20Inquiry`}
-                  whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(0,240,255,0.7)" }}
-                  whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(0,240,255,0.5)] border-2 border-cyan-200 gap-2.5 transition-all animate-pulse-slow w-full sm:w-auto cursor-pointer"
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                  className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(0,240,255,0.5)] hover:shadow-[0_0_35px_rgba(0,240,255,0.8)] border-2 border-cyan-200 gap-2.5 transition-all duration-200 animate-pulse-slow w-full sm:w-auto cursor-pointer active:scale-95"
                 >
                   <Mail className="w-4 h-4 text-slate-950" />
                   <span>Let's Build Your System</span>
-                </motion.a>
+                </a>
 
-                <motion.button
+                <button
+                  type="button"
                   onClick={handleCopyEmail}
-                  whileHover={{ scale: 1.03, borderColor: "rgba(0,240,255,0.5)", backgroundColor: "rgba(255,255,255,0.08)" }}
-                  whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-black/60 hover:bg-white/10 text-slate-200 text-sm font-medium border border-white/15 gap-2 transition-all shadow-lg w-full sm:w-auto cursor-pointer"
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-black/60 hover:bg-white/15 text-slate-200 text-sm font-medium border border-white/15 hover:border-cyan-400/50 gap-2 transition-all duration-200 shadow-lg w-full sm:w-auto cursor-pointer active:scale-95"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-cyan-400" /> : <Copy className="w-4 h-4 text-slate-400" />}
                   <span>{copiedEmail ? 'Copied to Clipboard!' : 'Copy Direct Email'}</span>
-                </motion.button>
+                </button>
               </div>
 
               {/* Social Channels & Trust Links */}
-              <div className="flex items-center justify-center gap-4 pt-8 border-t border-white/10">
-                <motion.a
+              <div className="flex items-center justify-center gap-4 pt-8 border-t border-white/10 relative z-20 pointer-events-auto">
+                <a
                   href="https://github.com/neggachabderrahmane"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
                   aria-label="GitHub Profile"
                 >
                   <GithubIcon className="w-5 h-5" />
-                </motion.a>
+                </a>
 
-                <motion.a
-                  href="https://linkedin.com"
+                <a
+                  href="https://www.linkedin.com/in/abderrahmane-neggach-087ba53b3?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
                   aria-label="LinkedIn Profile"
                 >
                   <LinkedinIcon className="w-5 h-5" />
-                </motion.a>
+                </a>
 
-                <motion.a
+                <a
                   href={`mailto:${emailAddress}`}
-                  whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
                   aria-label="Email Contact"
                 >
                   <Mail className="w-5 h-5" />
-                </motion.a>
+                </a>
               </div>
 
               {/* Embedded Footer inside Contact Card */}

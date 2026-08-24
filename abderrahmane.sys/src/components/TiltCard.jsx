@@ -4,11 +4,12 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 /**
  * TiltCard Component
  * Interactive 3D perspective tilt effect with cursor-following specular light reflection.
+ * Uses layout-stable transforms and isolated pointer-event layers to prevent flicker loops.
  */
 export default function TiltCard({
   children,
   className = '',
-  maxTilt = 12,
+  maxTilt = 10,
   glareOpacity = 0.15,
   onClick,
   ...props
@@ -21,7 +22,7 @@ export default function TiltCard({
   const mouseY = useMotionValue(0);
 
   // Spring configurations for ultra-smooth physical motion
-  const springConfig = { damping: 20, stiffness: 180, mass: 0.6 };
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
   const rotateX = useSpring(0, springConfig);
   const rotateY = useSpring(0, springConfig);
 
@@ -39,8 +40,8 @@ export default function TiltCard({
       const clientY = e.clientY - rect.top;
 
       // Normalized coordinates from -0.5 to 0.5
-      const xPct = clientX / width - 0.5;
-      const yPct = clientY / height - 0.5;
+      const xPct = Math.max(-0.5, Math.min(0.5, clientX / width - 0.5));
+      const yPct = Math.max(-0.5, Math.min(0.5, clientY / height - 0.5));
 
       rotateX.set(-yPct * maxTilt * 2);
       rotateY.set(xPct * maxTilt * 2);
@@ -73,22 +74,26 @@ export default function TiltCard({
         transformStyle: 'preserve-3d',
         rotateX,
         rotateY,
-        perspective: 1000
+        perspective: 1000,
+        willChange: 'transform'
       }}
       className={`relative overflow-hidden transition-shadow duration-300 ${className}`}
       {...props}
     >
       {/* Dynamic Specular Glare Reflection Layer */}
       <div
-        className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] transition-opacity duration-300"
         style={{
           opacity: isHovered ? glareOpacity : 0,
           background: `radial-gradient(650px circle at ${glarePos.x}% ${glarePos.y}%, rgba(0, 240, 255, 0.25), rgba(255, 0, 127, 0.15) 40%, transparent 80%)`
         }}
       />
 
-      {/* Card Content with 3D Depth & Explicit Pointer Events */}
-      <div className="relative z-30" style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
+      {/* Card Content with 3D Depth & Dedicated Pointer Event Layer */}
+      <div
+        className="relative z-20 pointer-events-auto"
+        style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}
+      >
         {children}
       </div>
     </motion.div>
