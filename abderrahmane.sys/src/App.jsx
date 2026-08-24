@@ -30,7 +30,8 @@ import {
   Lock,
   Boxes,
   CheckCheck,
-  SearchCode
+  SearchCode,
+  Rocket
 } from 'lucide-react';
 
 function GithubIcon(props) {
@@ -90,6 +91,8 @@ export default function App() {
 
   const totalFrames = 77;
   const emailAddress = "abderrahmane.contact.pro@gmail.com";
+  const linkedInUrl = "https://www.linkedin.com/in/abderrahmane-neggach-087ba53b3?utm_source=share_via&utm_content=profile&utm_medium=member_android";
+  const githubProfileUrl = "https://github.com/neggachabderrahmane";
   const progressPercentage = Math.min(100, Math.round(loadProgress * 100));
 
   // Lock scroll until all 77 frames are preloaded
@@ -226,70 +229,61 @@ export default function App() {
     }
   ];
 
-  const projects = [
-    {
-      id: 'relizane-fellah',
-      title: 'Relizane Fellah',
-      subtitle: 'Graduation Project & Patent Concept',
-      type: 'E-Commerce & AgriTech Platform',
-      impactBadge: 'Patent-Pending Concept',
-      metric: 'Direct Farm-to-Market Supply Chain',
-      description:
-        'An innovative digital ecosystem bridging agricultural producers directly with commercial markets and consumers. Features real-time stock management, transparent marketplace pricing, secure farmer-to-buyer transactions, and decentralized supply chain tools.',
-      tags: ['React.js', 'Node.js', 'Firebase', 'Tailwind CSS', 'Patent Concept'],
-      liveUrl: 'https://relizane-fellah.web.app/login',
-      githubUrl: 'https://github.com/neggachabderrahmane/abderrahmane.sys',
-      status: 'Live Platform',
-      badgeColor: 'border-cyan-400/40 text-cyan-300 bg-cyan-500/15',
-      featured: true
-    },
+  // 1. Production-Ready Flagship Project
+  const productionProject = {
+    id: 'relizane-fellah',
+    title: 'Relizane Fellah',
+    subtitle: 'Graduation Project & Decentralized AgriTech Marketplace',
+    type: 'Commercial E-Commerce Platform',
+    impactBadge: 'Patent-Pending Concept',
+    metric: 'Direct Farm-to-Market Supply Chain',
+    description:
+      'An innovative digital marketplace ecosystem bridging agricultural producers directly with commercial markets and consumers. Features real-time stock management, transparent marketplace pricing, secure farmer-to-buyer transactions, and decentralized supply chain tools.',
+    tags: ['React.js 19', 'Node.js', 'Firebase', 'Tailwind CSS', 'PWA Offline', 'Patent Concept'],
+    liveUrl: 'https://relizane-fellah.web.app/login',
+    githubUrl: 'https://github.com/neggachabderrahmane/abderrahmane.sys'
+  };
+
+  // 2. Under-Development / R&D Projects
+  const rndProjects = [
     {
       id: 'gym-app',
       title: 'Gym Mobile App',
       subtitle: 'Cross-Platform Fitness Management',
       type: 'Mobile Application',
-      impactBadge: 'Cross-Platform Mobile',
+      impactBadge: 'Active R&D',
       metric: 'Offline-First & Biometrics',
       description:
         'A comprehensive fitness and gym ecosystem built with React Native. Offers automated member check-ins, custom workout routine planners, subscription tracking, and real-time biometric progress metrics.',
-      tags: ['React Native', 'Mobile UI/UX', 'State Management', 'REST APIs'],
-      liveUrl: 'https://github.com/neggachabderrahmane',
-      githubUrl: 'https://github.com/neggachabderrahmane',
+      tags: ['React Native', 'Mobile UI/UX', 'State Management', 'REST APIs', 'Biometrics'],
       icon: Smartphone,
-      status: 'Production Ready',
-      badgeColor: 'border-fuchsia-400/40 text-fuchsia-300 bg-fuchsia-500/15'
+      accent: 'border-fuchsia-500/30 text-fuchsia-400'
     },
     {
       id: 'teamsync',
       title: 'Abdo-Team',
       subtitle: 'B2B SaaS Project Management',
       type: 'Enterprise Web Application',
-      impactBadge: 'Multi-Tenant SaaS',
+      impactBadge: 'Active R&D',
       metric: 'Real-time WebSockets & RBAC',
       description:
         'Scalable B2B SaaS platform engineered for engineering squads and enterprise collaboration. Implements real-time Kanban boards, sprint telemetry, granular role-based access control, and workspace activity audits.',
-      tags: ['React.js', 'Node.js', 'MongoDB', 'WebSockets', 'B2B SaaS'],
-      liveUrl: 'https://github.com/neggachabderrahmane',
-      githubUrl: 'https://github.com/neggachabderrahmane',
+      tags: ['React.js', 'Node.js', 'MongoDB', 'WebSockets', 'B2B SaaS', 'Multi-Tenant'],
       icon: Layers,
-      status: 'Enterprise SaaS',
-      badgeColor: 'border-blue-400/40 text-blue-300 bg-blue-500/15'
+      accent: 'border-blue-500/30 text-blue-400'
     },
     {
       id: 'nhdro',
       title: 'Nhdro',
       subtitle: 'Interactive Education Platform',
       type: 'EdTech Learning Hub',
-      impactBadge: 'EdTech Platform',
+      impactBadge: 'Active R&D',
       metric: 'Zero-Latency Classroom LMS',
       description:
         'Educational learning management platform tailored for modern classrooms. Features interactive course modules, automated assessment grading, downloadable resources, and live peer collaboration spaces.',
-      tags: ['React.js', 'JavaScript', 'EdTech', 'Responsive Design'],
-      liveUrl: 'https://github.com/neggachabderrahmane',
-      githubUrl: 'https://github.com/neggachabderrahmane',
+      tags: ['React.js', 'JavaScript', 'EdTech', 'Responsive Design', 'Exam Lockdown'],
       icon: BookOpen,
-      status: 'Deployed LMS',
-      badgeColor: 'border-emerald-400/40 text-emerald-300 bg-emerald-500/15'
+      accent: 'border-emerald-500/30 text-emerald-400'
     }
   ];
 
@@ -344,7 +338,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 1. X-RAY SYSTEM INSPECTOR MODAL */}
+      {/* 3. FULLY FUNCTIONAL INTERACTIVE 'INSPECT ARCHITECTURE' MODAL */}
       <AnimatePresence>
         {inspectingProjectId && (
           <SystemInspectorModal
@@ -418,7 +412,7 @@ export default function App() {
         }}
       />
 
-      {/* 3. CENTERED FLOATING CAPSULE NAVBAR */}
+      {/* Modern Centered Floating Capsule Navbar */}
       <motion.header
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -761,135 +755,216 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        {/* SECTION 4: FEATURED PROJECTS WITH FLICKER-FREE ACTION BUTTONS */}
+        {/* SECTION 4: RESTRUCTURED PROJECTS SECTION (1. PRODUCTION READY & 2. R&D CONCEPTS) */}
         <motion.section
           id="projects"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={containerVariants}
-          className="space-y-8 scroll-mt-24 sm:scroll-mt-28"
+          className="space-y-12 scroll-mt-24 sm:scroll-mt-28"
         >
-          <motion.div variants={itemVariants} className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h2 className="text-xs uppercase tracking-widest text-cyan-400 font-mono font-bold mb-2">Featured Showcase</h2>
-            <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-white tracking-tight">Key Projects & Inventions</h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1.5">Web applications, mobile software, SaaS & patent concepts</p>
+          <motion.div variants={itemVariants} className="text-center max-w-2xl mx-auto">
+            <h2 className="text-xs uppercase tracking-widest text-cyan-400 font-mono font-bold mb-2">Systems Portfolio</h2>
+            <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-white tracking-tight">Featured Engineering Showcase</h3>
+            <p className="text-xs sm:text-sm text-slate-400 mt-1.5">Live production software and active research & development blueprints</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                className={project.featured ? 'lg:col-span-2' : ''}
-              >
-                <TiltCard
-                  maxTilt={project.featured ? 5 : 8}
-                  glareOpacity={0.2}
-                  className={`backdrop-blur-xl bg-black/60 border border-white/15 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.2)] group h-full ${
-                    project.featured ? 'bg-gradient-to-br from-black/70 via-black/60 to-cyan-950/30 border-cyan-500/30' : ''
-                  }`}
-                >
-                  <div>
-                    {/* Header Badges */}
-                    <div className="flex flex-wrap items-center justify-between gap-2.5 mb-4">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className={`inline-block px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold border ${project.badgeColor}`}>
-                          {project.type}
+          {/* 1. PRODUCTION-READY ACTIVE FLAGSHIP (Relizane Fellah) */}
+          <motion.div variants={itemVariants} className="w-full">
+            <TiltCard
+              maxTilt={5}
+              glareOpacity={0.2}
+              className="backdrop-blur-xl bg-gradient-to-br from-black/85 via-[#030d1a]/80 to-cyan-950/40 border border-cyan-400/50 rounded-3xl p-6 sm:p-10 shadow-[0_0_40px_rgba(0,240,255,0.2)] hover:shadow-[0_0_60px_rgba(0,240,255,0.35)] transition-all duration-300"
+            >
+              <div className="flex flex-col justify-between h-full">
+                <div>
+                  {/* Top Badges: Live in Production & Patent Concept */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      {/* Vibrant Green Pulsing Live Badge */}
+                      <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/15 border border-emerald-400/50 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                        <span className="flex h-2 w-2 relative">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_6px_#10b981]"></span>
                         </span>
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold bg-cyan-500/10 border border-cyan-400/30 text-cyan-300">
-                          <Sparkles className="w-3 h-3 text-cyan-400" />
-                          {project.impactBadge}
-                        </span>
-                      </div>
+                        <span>● LIVE IN PRODUCTION</span>
+                      </span>
 
-                      <span className="px-3 py-1 rounded-full text-[10px] font-mono font-semibold bg-white/5 border border-white/10 text-slate-300 shrink-0">
-                        {project.status}
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-500/10 border border-cyan-400/40 text-cyan-300">
+                        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>{productionProject.impactBadge}</span>
                       </span>
                     </div>
 
-                    <h4 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-cyan-200 transition-colors mb-1">
-                      {project.title}
-                    </h4>
-                    <p className="text-xs text-slate-400 font-medium mb-3">{project.subtitle}</p>
-
-                    {/* Result / Metric Highlight */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-cyan-300 mb-4">
-                      <Zap className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>{project.metric}</span>
-                    </div>
-
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
-                      {project.description}
-                    </p>
+                    <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-white/5 border border-white/10 text-slate-300">
+                      {productionProject.type}
+                    </span>
                   </div>
 
-                  <div>
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 rounded-full text-[11px] font-medium bg-white/[0.04] text-slate-300 border border-white/10"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  <h4 className="text-2xl sm:text-3xl font-extrabold font-display text-white tracking-tight mb-1 text-glow-white">
+                    {productionProject.title}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-400 font-mono mb-4">{productionProject.subtitle}</p>
 
-                    {/* 1. Layout-Safe Action Buttons Container with Explicit Pointer-Events & z-index */}
-                    <div className="relative z-20 pointer-events-auto flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/10">
-                      {project.liveUrl ? (
+                  {/* Highlight Metric */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-cyan-300 mb-5">
+                    <Zap className="w-4 h-4 text-cyan-400" />
+                    <span>{productionProject.metric}</span>
+                  </div>
+
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    {productionProject.description}
+                  </p>
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {productionProject.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-200 border border-cyan-500/20"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3 Fully Active Glowing Action Buttons */}
+                <div className="relative z-20 pointer-events-auto flex flex-wrap items-center gap-3 pt-5 border-t border-white/10">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(productionProject.liveUrl, '_blank', 'noopener,noreferrer');
+                    }}
+                    onMouseEnter={(e) => e.stopPropagation()}
+                    onMouseMove={(e) => e.stopPropagation()}
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all duration-200 cursor-pointer active:scale-95"
+                  >
+                    <Rocket className="w-4 h-4 text-slate-950 font-bold" />
+                    <span>🚀 LIVE DEMO</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-950 font-bold" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInspectingProjectId(productionProject.id);
+                    }}
+                    onMouseEnter={(e) => e.stopPropagation()}
+                    onMouseMove={(e) => e.stopPropagation()}
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-cyan-500/15 text-cyan-300 hover:text-white text-xs sm:text-sm font-bold tracking-wider uppercase border border-cyan-400/50 hover:bg-cyan-500/25 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all duration-200 cursor-pointer active:scale-95"
+                  >
+                    <SearchCode className="w-4 h-4 text-cyan-400" />
+                    <span>🔍 INSPECT ARCHITECTURE</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(productionProject.githubUrl, '_blank', 'noopener,noreferrer');
+                    }}
+                    onMouseEnter={(e) => e.stopPropagation()}
+                    onMouseMove={(e) => e.stopPropagation()}
+                    className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-black/60 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
+                    aria-label="View Project on GitHub"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>📂 GITHUB</span>
+                  </button>
+                </div>
+              </div>
+            </TiltCard>
+          </motion.div>
+
+          {/* 2. UNDER-DEVELOPMENT / R&D CONCEPTS (3 Upcoming Classified Systems) */}
+          <div className="space-y-6 pt-4">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+              <div>
+                <h4 className="text-lg sm:text-xl font-bold font-display text-white flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-amber-400" />
+                  <span>Next-Gen Systems & Active R&D</span>
+                </h4>
+                <p className="text-xs text-slate-400 font-mono">Classified architecture blueprints under active engineering</p>
+              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 border border-amber-400/40 text-amber-300">
+                3 CLASSIFIED BLUEPRINTS
+              </span>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {rndProjects.map((project) => {
+                const IconComponent = project.icon;
+                return (
+                  <motion.div key={project.id} variants={itemVariants} className="h-full">
+                    <TiltCard
+                      maxTilt={7}
+                      glareOpacity={0.15}
+                      className="backdrop-blur-xl bg-black/75 border border-dashed border-cyan-500/30 hover:border-cyan-400/60 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl hover:shadow-[0_0_30px_rgba(0,240,255,0.2)] transition-all duration-300 h-full"
+                    >
+                      <div>
+                        {/* Classified R&D Badge */}
+                        <div className="flex items-center justify-between gap-2 mb-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 border border-amber-400/40 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+                            <Zap className="w-3 h-3 text-amber-400" />
+                            <span>⚡ IN ACTIVE R&D / CLASSIFIED</span>
+                          </span>
+                          <div className={`p-2 rounded-xl border ${project.accent}`}>
+                            <IconComponent className="w-4 h-4" />
+                          </div>
+                        </div>
+
+                        <h4 className="text-xl font-bold font-display text-white mb-1">
+                          {project.title}
+                        </h4>
+                        <p className="text-xs text-slate-400 font-mono mb-3">{project.subtitle}</p>
+
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.03] border border-white/10 text-[11px] font-mono text-cyan-300 mb-4">
+                          <Sparkles className="w-3 h-3 text-cyan-400" />
+                          <span>{project.metric}</span>
+                        </div>
+
+                        <p className="text-slate-300 text-xs leading-relaxed mb-6 font-normal">
+                          {project.description}
+                        </p>
+
+                        {/* Tech Pills */}
+                        <div className="flex flex-wrap gap-1.5 mb-6">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.03] text-slate-300 border border-white/10"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Single Purposeful Blueprint CTA Button */}
+                      <div className="relative z-20 pointer-events-auto pt-4 border-t border-white/10">
                         <button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                            setInspectingProjectId(project.id);
                           }}
                           onMouseEnter={(e) => e.stopPropagation()}
                           onMouseMove={(e) => e.stopPropagation()}
-                          className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 text-xs font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all duration-200 flex-1 sm:flex-initial cursor-pointer active:scale-95"
+                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-cyan-500/10 to-fuchsia-500/10 hover:from-cyan-500/25 hover:to-fuchsia-500/25 text-slate-100 text-xs font-mono font-bold tracking-wider uppercase border border-cyan-400/40 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.15)] hover:shadow-[0_0_25px_rgba(0,240,255,0.35)] transition-all duration-200 cursor-pointer active:scale-95"
                         >
-                          <span>Live Demo</span>
-                          <ExternalLink className="w-3.5 h-3.5 text-slate-950 font-bold" />
+                          <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>🔒 VIEW SYSTEM BLUEPRINT & ARCHITECTURE</span>
                         </button>
-                      ) : null}
-
-                      {/* Inspect Architecture Button */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setInspectingProjectId(project.id);
-                        }}
-                        onMouseEnter={(e) => e.stopPropagation()}
-                        onMouseMove={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-cyan-500/10 text-cyan-300 hover:text-white text-xs font-bold tracking-wider uppercase border border-cyan-400/40 hover:bg-cyan-500/20 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.15)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 flex-1 sm:flex-initial cursor-pointer active:scale-95"
-                      >
-                        <SearchCode className="w-4 h-4 text-cyan-400" />
-                        <span>Inspect Architecture</span>
-                      </button>
-
-                      {/* GitHub Source Link Button */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(project.githubUrl || "https://github.com/neggachabderrahmane", '_blank', 'noopener,noreferrer');
-                        }}
-                        onMouseEnter={(e) => e.stopPropagation()}
-                        onMouseMove={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-3.5 rounded-xl bg-black/50 text-slate-300 hover:text-white text-xs font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
-                        aria-label="View Source on GitHub"
-                      >
-                        <GithubIcon className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">GitHub</span>
-                      </button>
-                    </div>
-                  </div>
-                </TiltCard>
-              </motion.div>
-            ))}
+                      </div>
+                    </TiltCard>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </motion.section>
 
@@ -951,7 +1026,7 @@ export default function App() {
               {/* Social Channels & Trust Links */}
               <div className="flex items-center justify-center gap-4 pt-8 border-t border-white/10 relative z-20 pointer-events-auto">
                 <a
-                  href="https://github.com/neggachabderrahmane"
+                  href={githubProfileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={(e) => e.stopPropagation()}
@@ -963,7 +1038,7 @@ export default function App() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/abderrahmane-neggach-087ba53b3?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                  href={linkedInUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={(e) => e.stopPropagation()}
