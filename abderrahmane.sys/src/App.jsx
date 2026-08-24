@@ -841,6 +841,8 @@ export default function App() {
                     onMouseEnter={(e) => e.stopPropagation()}
                     onMouseMove={(e) => e.stopPropagation()}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all duration-200 cursor-pointer active:scale-95"
+                    href="https://relizane-fellah.web.app"
+                    
                   >
                     <Rocket className="w-4 h-4 text-slate-950 font-bold" />
                     <span>🚀 LIVE DEMO</span>
@@ -871,6 +873,7 @@ export default function App() {
                     onMouseMove={(e) => e.stopPropagation()}
                     className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-black/60 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
                     aria-label="View Project on GitHub"
+                    href="https://github.com/neggachabderrahmane"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>📂 GITHUB</span>
