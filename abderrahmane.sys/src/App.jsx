@@ -90,7 +90,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('about');
 
   const totalFrames = 77;
-  const emailAddress = "abderrahmane.contact.pro@gmail.com";
+  const emailAddress = "neggachabderrahmane@gmail.com";
   const linkedInUrl = "https://www.linkedin.com/in/abderrahmane-neggach-087ba53b3?utm_source=share_via&utm_content=profile&utm_medium=member_android";
   const githubProfileUrl = "https://github.com/neggachabderrahmane";
   const progressPercentage = Math.min(100, Math.round(loadProgress * 100));
@@ -842,7 +842,8 @@ export default function App() {
                     onMouseMove={(e) => e.stopPropagation()}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all duration-200 cursor-pointer active:scale-95"
                     href="https://relizane-fellah.web.app"
-                    
+                    target="_blank"
+                    rel="noopener noreferrer"                  
                   >
                     <Rocket className="w-4 h-4 text-slate-950 font-bold" />
                     <span>🚀 LIVE DEMO</span>
@@ -874,6 +875,8 @@ export default function App() {
                     className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-black/60 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
                     aria-label="View Project on GitHub"
                     href="https://github.com/neggachabderrahmane"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>📂 GITHUB</span>
@@ -1048,6 +1051,7 @@ export default function App() {
                   onMouseMove={(e) => e.stopPropagation()}
                   className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
                   aria-label="LinkedIn Profile"
+                  
                 >
                   <LinkedinIcon className="w-5 h-5" />
                 </a>
