@@ -832,23 +832,19 @@ export default function App() {
 
                 {/* 3 Fully Active Glowing Action Buttons */}
                 <div className="relative z-20 pointer-events-auto flex flex-wrap items-center gap-3 pt-5 border-t border-white/10">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(productionProject.liveUrl, '_blank', 'noopener,noreferrer');
-                    }}
+                  <a
+                    href={productionProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     onMouseEnter={(e) => e.stopPropagation()}
                     onMouseMove={(e) => e.stopPropagation()}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all duration-200 cursor-pointer active:scale-95"
-                    href="https://relizane-fellah.web.app"
-                    target="_blank"
-                    rel="noopener noreferrer"                  
                   >
                     <Rocket className="w-4 h-4 text-slate-950 font-bold" />
                     <span>🚀 LIVE DEMO</span>
                     <ExternalLink className="w-3.5 h-3.5 text-slate-950 font-bold" />
-                  </button>
+                  </a>
 
                   <button
                     type="button"
@@ -864,23 +860,19 @@ export default function App() {
                     <span>🔍 INSPECT ARCHITECTURE</span>
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(productionProject.githubUrl, '_blank', 'noopener,noreferrer');
-                    }}
+                  <a
+                    href={productionProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     onMouseEnter={(e) => e.stopPropagation()}
                     onMouseMove={(e) => e.stopPropagation()}
                     className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-black/60 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold tracking-wide border border-white/15 hover:border-white/40 hover:bg-white/10 transition-all duration-200 cursor-pointer active:scale-95"
                     aria-label="View Project on GitHub"
-                    href="https://github.com/neggachabderrahmane"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>📂 GITHUB</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </TiltCard>
@@ -1009,6 +1001,8 @@ export default function App() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 w-full relative z-20 pointer-events-auto">
                 <a
                   href={`mailto:${emailAddress}?subject=Engineering%20Collaboration%20Inquiry`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onMouseEnter={(e) => e.stopPropagation()}
                   onMouseMove={(e) => e.stopPropagation()}
                   className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(0,240,255,0.5)] hover:shadow-[0_0_35px_rgba(0,240,255,0.8)] border-2 border-cyan-200 gap-2.5 transition-all duration-200 animate-pulse-slow w-full sm:w-auto cursor-pointer active:scale-95"
@@ -1058,6 +1052,8 @@ export default function App() {
 
                 <a
                   href={`mailto:${emailAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onMouseEnter={(e) => e.stopPropagation()}
                   onMouseMove={(e) => e.stopPropagation()}
                   className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-200 shadow-lg cursor-pointer active:scale-95"
