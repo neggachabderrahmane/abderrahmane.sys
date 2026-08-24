@@ -123,8 +123,8 @@ const projectArchitectures = {
     ]
   },
   'teamsync': {
-    title: 'TeamSync / Abdo-Team — Architecture Map',
-    subtitle: 'High-Concurrency B2B SaaS Collaboration & Real-Time Sync Engine',
+    title: 'Abdo-Team — Architecture Map',
+    subtitle: 'High-Concurrency B2B SaaS Collaboration & Real-Time',
     nodes: [
       {
         id: 'frontend',

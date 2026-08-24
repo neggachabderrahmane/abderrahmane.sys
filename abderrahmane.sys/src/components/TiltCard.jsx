@@ -87,8 +87,8 @@ export default function TiltCard({
         }}
       />
 
-      {/* Card Content with 3D Depth */}
-      <div style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
+      {/* Card Content with 3D Depth & Explicit Pointer Events */}
+      <div className="relative z-30" style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
         {children}
       </div>
     </motion.div>

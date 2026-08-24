@@ -4,6 +4,7 @@ import ScrollCanvasBackground from './components/ScrollCanvasBackground';
 import TiltCard from './components/TiltCard';
 import SystemInspectorModal from './components/SystemInspectorModal';
 import TrafficSimulator from './components/TrafficSimulator';
+import CustomCursor from './components/CustomCursor';
 import {
   Code2,
   ShieldCheck,
@@ -85,6 +86,7 @@ export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const [inspectingProjectId, setInspectingProjectId] = useState(null);
+  const [activeSection, setActiveSection] = useState('about');
 
   const totalFrames = 77;
   const emailAddress = "abderrahmane.contact.pro@gmail.com";
@@ -104,7 +106,7 @@ export default function App() {
     }
   }, [isLoaded]);
 
-  // Track scroll depth and frame number
+  // Track scroll depth, frame index, and active navigation section
   useEffect(() => {
     const handleScroll = () => {
       if (!isLoaded) return;
@@ -117,6 +119,17 @@ export default function App() {
 
       setScrollPct(Math.round(fraction * 100));
       setCurrentFrame(Math.min(totalFrames - 1, Math.floor(fraction * totalFrames)));
+
+      // Active section scroll spy
+      const sections = ['about', 'skills', 'standards', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 220;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -130,6 +143,15 @@ export default function App() {
       window.removeEventListener('wheel', handleScroll);
     };
   }, [totalFrames, isLoaded]);
+
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+    }
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -215,7 +237,7 @@ export default function App() {
         'An innovative digital ecosystem bridging agricultural producers directly with commercial markets and consumers. Features real-time stock management, transparent marketplace pricing, secure farmer-to-buyer transactions, and decentralized supply chain tools.',
       tags: ['React.js', 'Node.js', 'Firebase', 'Tailwind CSS', 'Patent Concept'],
       liveUrl: 'https://relizane-fellah.web.app/login',
-      githubUrl: 'https://github.com',
+      githubUrl: 'https://github.com/neggachabderrahmane/abderrahmane.sys',
       status: 'Live Platform',
       badgeColor: 'border-cyan-400/40 text-cyan-300 bg-cyan-500/15',
       featured: true
@@ -230,8 +252,8 @@ export default function App() {
       description:
         'A comprehensive fitness and gym ecosystem built with React Native. Offers automated member check-ins, custom workout routine planners, subscription tracking, and real-time biometric progress metrics.',
       tags: ['React Native', 'Mobile UI/UX', 'State Management', 'REST APIs'],
-      liveUrl: 'https://github.com',
-      githubUrl: 'https://github.com',
+      liveUrl: 'https://github.com/neggachabderrahmane',
+      githubUrl: 'https://github.com/neggachabderrahmane',
       icon: Smartphone,
       status: 'Production Ready',
       badgeColor: 'border-fuchsia-400/40 text-fuchsia-300 bg-fuchsia-500/15'
@@ -246,8 +268,8 @@ export default function App() {
       description:
         'Scalable B2B SaaS platform engineered for engineering squads and enterprise collaboration. Implements real-time Kanban boards, sprint telemetry, granular role-based access control, and workspace activity audits.',
       tags: ['React.js', 'Node.js', 'MongoDB', 'WebSockets', 'B2B SaaS'],
-      liveUrl: 'https://github.com',
-      githubUrl: 'https://github.com',
+      liveUrl: 'https://github.com/neggachabderrahmane',
+      githubUrl: 'https://github.com/neggachabderrahmane',
       icon: Layers,
       status: 'Enterprise SaaS',
       badgeColor: 'border-blue-400/40 text-blue-300 bg-blue-500/15'
@@ -262,16 +284,27 @@ export default function App() {
       description:
         'Educational learning management platform tailored for modern classrooms. Features interactive course modules, automated assessment grading, downloadable resources, and live peer collaboration spaces.',
       tags: ['React.js', 'JavaScript', 'EdTech', 'Responsive Design'],
-      liveUrl: 'https://github.com',
-      githubUrl: 'https://github.com',
+      liveUrl: 'https://github.com/neggachabderrahmane',
+      githubUrl: 'https://github.com/neggachabderrahmane',
       icon: BookOpen,
       status: 'Deployed LMS',
       badgeColor: 'border-emerald-400/40 text-emerald-300 bg-emerald-500/15'
     }
   ];
 
+  const navLinks = [
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'standards', label: 'Standards' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   return (
     <div className="relative w-full text-slate-100 min-h-[440vh] selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden font-sans">
+      {/* 2. NEXT-GEN MODERN CUSTOM CURSOR */}
+      <CustomCursor />
+
       {/* Background Frame Sequence Canvas (Top-Anchored Cover) */}
       <ScrollCanvasBackground
         frameCount={totalFrames}
@@ -384,38 +417,59 @@ export default function App() {
         }}
       />
 
-      {/* Compact Polished Glass Navbar */}
+      {/* 3. UPGRADED CENTERED FLOATING CAPSULE NAVBAR */}
       <motion.header
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-30 backdrop-blur-md bg-black/40 border-b border-white/10 shadow-lg shadow-black/40 transition-all duration-300"
+        className="fixed top-3 sm:top-5 left-1/2 -translate-x-1/2 z-40 w-[94%] sm:w-auto max-w-4xl"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5 font-bold tracking-tight text-white group">
+        <nav className="rounded-full backdrop-blur-xl bg-black/60 border border-white/15 px-3.5 sm:px-6 py-2 sm:py-2.5 shadow-2xl shadow-black/80 flex items-center justify-between gap-3 sm:gap-6 hover:border-cyan-500/40 transition-all duration-300">
+          <a
+            href="#about"
+            onClick={(e) => scrollToSection(e, 'about')}
+            className="flex items-center gap-2.5 font-bold tracking-tight text-white group cursor-pointer"
+          >
             <span className="flex h-2.5 w-2.5 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400 shadow-[0_0_8px_#00f0ff]"></span>
             </span>
-            <span className="text-sm sm:text-base font-extrabold font-display bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent group-hover:text-glow-cyan transition-all">
+            <span className="text-xs sm:text-sm font-extrabold font-display bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent group-hover:text-glow-cyan transition-all">
               abderrahmane.sys
             </span>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-6 text-xs uppercase tracking-widest font-semibold text-slate-300 font-mono">
-            <a href="#about" className="hover:text-cyan-300 transition-colors">About</a>
-            <a href="#skills" className="hover:text-cyan-300 transition-colors">Skills</a>
-            <a href="#standards" className="hover:text-cyan-300 transition-colors">Standards</a>
-            <a href="#projects" className="hover:text-cyan-300 transition-colors">Projects</a>
-            <a href="#contact" className="hover:text-cyan-300 transition-colors">Contact</a>
+          {/* Centered Desktop Capsule Navigation Links with Active Indicator */}
+          <div className="hidden md:flex items-center gap-1 text-xs uppercase tracking-wider font-semibold text-slate-300 font-mono bg-white/[0.03] p-1 rounded-full border border-white/5">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => scrollToSection(e, link.id)}
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                    isActive ? 'text-cyan-300 font-bold' : 'hover:text-white text-slate-400'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-capsule-pill"
+                      className="absolute inset-0 bg-cyan-500/15 border border-cyan-400/30 rounded-full -z-10 shadow-[0_0_12px_rgba(0,240,255,0.25)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span>{link.label}</span>
+                </a>
+              );
+            })}
           </div>
 
-          {/* Real-Time Telemetry Badge & Action */}
+          {/* Real-Time Telemetry Badge & Action Button */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 border border-cyan-500/30 text-[11px] font-mono text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-              <span className="text-slate-400 hidden xs:inline">FRAME</span>
-              <span className="font-bold text-white">#{String(currentFrame + 1).padStart(2, '0')}</span>
+            <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/50 border border-cyan-500/30 text-[10px] sm:text-[11px] font-mono text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.15)]">
+              <span className="text-slate-400 hidden xs:inline">F#</span>
+              <span className="font-bold text-white">{String(currentFrame + 1).padStart(2, '0')}</span>
               <span className="text-slate-600">/</span>
               <span className="text-slate-400">{totalFrames}</span>
               <span className="text-slate-600 hidden sm:inline">•</span>
@@ -424,21 +478,22 @@ export default function App() {
 
             <motion.a
               href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0,240,255,0.6)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(0,240,255,0.4)]"
+              className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(0,240,255,0.4)] cursor-pointer"
             >
               Connect
             </motion.a>
           </div>
-        </div>
+        </nav>
       </motion.header>
 
       {/* Main Content Layout Container (max-w-7xl, responsive padding) */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-24 space-y-36 sm:space-y-48">
 
         {/* SECTION 1: HERO */}
-        <section id="about" className="min-h-[85vh] flex flex-col justify-center items-center text-center pt-6 sm:pt-10">
+        <section id="about" className="min-h-[85vh] flex flex-col justify-center items-center text-center pt-6 sm:pt-10 scroll-mt-24">
           <TiltCard
             maxTilt={7}
             glareOpacity={0.2}
@@ -520,9 +575,10 @@ export default function App() {
               >
                 <motion.a
                   href="#projects"
+                  onClick={(e) => scrollToSection(e, 'projects')}
                   whileHover={{ scale: 1.04, boxShadow: "0 0 25px rgba(0,240,255,0.5)" }}
                   whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.4)] gap-2 transition-all"
+                  className="inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium text-sm w-full sm:w-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.4)] gap-2 transition-all cursor-pointer"
                 >
                   <span>Explore Featured Projects</span>
                   <ArrowUpRight className="w-4 h-4 text-slate-950 font-bold" />
@@ -644,7 +700,7 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        {/* SECTION 3: ENGINEERING STANDARDS & 2. LIVE TRAFFIC STRESS TEST SIMULATOR */}
+        {/* SECTION 3: ENGINEERING STANDARDS & LIVE TRAFFIC STRESS TEST SIMULATOR */}
         <motion.section
           id="standards"
           initial="hidden"
@@ -707,13 +763,13 @@ export default function App() {
             })}
           </div>
 
-          {/* 2. Interactive Architecture Stress Test Widget */}
+          {/* Interactive Architecture Stress Test Widget */}
           <motion.div variants={itemVariants}>
             <TrafficSimulator />
           </motion.div>
         </motion.section>
 
-        {/* SECTION 4: FEATURED PROJECTS WITH 1. X-RAY INSPECT ARCHITECTURE BUTTON */}
+        {/* SECTION 4: FEATURED PROJECTS WITH 1. VERIFIED WORKING ACTION BUTTONS */}
         <motion.section
           id="projects"
           initial="hidden"
@@ -789,7 +845,7 @@ export default function App() {
                       ))}
                     </div>
 
-                    {/* Action Buttons: Live Demo, Inspect Architecture & GitHub */}
+                    {/* 1. Fully Verified Active Action Buttons */}
                     <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/10">
                       {project.liveUrl ? (
                         <motion.button
@@ -807,14 +863,14 @@ export default function App() {
                         </motion.button>
                       ) : null}
 
-                      {/* 1. Interactive X-Ray System Inspector Button */}
+                      {/* Inspect Architecture Button */}
                       <motion.button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setInspectingProjectId(project.id);
                         }}
-                        whileHover={{ scale: 1.04, borderColor: "rgba(0,240,255,0.6)", backgroundColor: "rgba(0,240,255,0.12)" }}
+                        whileHover={{ scale: 1.04, borderColor: "rgba(0,240,255,0.6)", backgroundColor: "rgba(0,240,255,0.15)" }}
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex items-center justify-center gap-2 h-11 px-4 sm:px-5 rounded-xl bg-cyan-500/10 text-cyan-300 text-xs font-bold tracking-wider uppercase border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.15)] transition-all flex-1 sm:flex-initial cursor-pointer"
                       >
@@ -822,16 +878,17 @@ export default function App() {
                         <span>Inspect Architecture</span>
                       </motion.button>
 
+                      {/* GitHub Source Link Button */}
                       <motion.button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          window.open(project.githubUrl || "https://github.com", '_blank', 'noopener,noreferrer');
+                          window.open(project.githubUrl || "https://github.com/neggachabderrahmane", '_blank', 'noopener,noreferrer');
                         }}
                         whileHover={{ scale: 1.04, borderColor: "rgba(255,255,255,0.4)", backgroundColor: "rgba(255,255,255,0.08)" }}
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex items-center justify-center gap-2 h-11 px-3.5 rounded-xl bg-black/50 text-slate-300 text-xs font-semibold tracking-wide border border-white/15 transition-all hover:text-white cursor-pointer"
-                        aria-label="View Architecture Source Code"
+                        aria-label="View Source on GitHub"
                       >
                         <GithubIcon className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">GitHub</span>
@@ -882,7 +939,7 @@ export default function App() {
                   href={`mailto:${emailAddress}?subject=Engineering%20Collaboration%20Inquiry`}
                   whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(0,240,255,0.7)" }}
                   whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(0,240,255,0.5)] border-2 border-cyan-200 gap-2.5 transition-all animate-pulse-slow w-full sm:w-auto"
+                  className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-slate-950 text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(0,240,255,0.5)] border-2 border-cyan-200 gap-2.5 transition-all animate-pulse-slow w-full sm:w-auto cursor-pointer"
                 >
                   <Mail className="w-4 h-4 text-slate-950" />
                   <span>Let's Build Your System</span>
@@ -902,12 +959,12 @@ export default function App() {
               {/* Social Channels & Trust Links */}
               <div className="flex items-center justify-center gap-4 pt-8 border-t border-white/10">
                 <motion.a
-                  href="https://github.com"
+                  href="https://github.com/neggachabderrahmane"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg"
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
                   aria-label="GitHub Profile"
                 >
                   <GithubIcon className="w-5 h-5" />
@@ -919,7 +976,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg"
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
                   aria-label="LinkedIn Profile"
                 >
                   <LinkedinIcon className="w-5 h-5" />
@@ -929,7 +986,7 @@ export default function App() {
                   href={`mailto:${emailAddress}`}
                   whileHover={{ scale: 1.15, boxShadow: "0 0 20px rgba(0,240,255,0.4)" }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg"
+                  className="p-3.5 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 transition-all shadow-lg cursor-pointer"
                   aria-label="Email Contact"
                 >
                   <Mail className="w-5 h-5" />
